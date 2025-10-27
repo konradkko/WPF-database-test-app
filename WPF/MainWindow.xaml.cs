@@ -68,7 +68,7 @@ namespace WPF
                 }
                 else
                 {
-                    Log($"Anulowano usuwanie wpisu: '{MainVM.SelectedItem.Name}'");
+                    Log($"Anulowano usuwanie wpisu: '{MainVM.SelectedItem.Name}'", true);
                 }
             }
         }
