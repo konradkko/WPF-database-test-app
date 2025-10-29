@@ -17,7 +17,7 @@ namespace WPF.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         #endregion
-        private string name = string.Empty, userEntry = string.Empty, result = string.Empty, log_tb = string.Empty;       
+        private string name = string.Empty, userEntry = string.Empty, result = string.Empty, log_tb = string.Empty;
 
         public string Name { get { return name; } set { name = value; OnPropertyChanged("Name"); } }
         public string UserEntry { get { return userEntry; } set { userEntry = value; OnPropertyChanged("UserEntry"); } }
@@ -26,12 +26,14 @@ namespace WPF.ViewModel
         public string Log_tb { get { return log_tb; } set { log_tb = value; OnPropertyChanged("Log_tb"); } }
 
 
-        private EncryptedInformation selectedItem ;
+        private EncryptedInformation selectedItem;
         public EncryptedInformation SelectedItem { get { return selectedItem; } set { selectedItem = value; OnPropertyChanged("SelectedItem"); } }
 
-        private string selectedNameLabel = "Nie wybrano", selectedDataLabel = "Nie wybrano";
+        private string selectedNameLabel = "Nie wybrano", selectedDataLabel = "Nie wybrano", selectedKeyLabel = "Nie wybrano";
         public string SelectedNameLabel { get { return selectedNameLabel; } set { selectedNameLabel = value; OnPropertyChanged("SelectedNameLabel"); } }
         public string SelectedDataLabel { get { return selectedDataLabel; } set { selectedDataLabel = value; OnPropertyChanged("SelectedDataLabel"); } }
+        public string SelectedKeyLabel { get { return selectedKeyLabel; } set { selectedKeyLabel = value; OnPropertyChanged("SelectedKeyLabel"); } }
+
 
         private ObservableCollection<EncryptedInformation> listaDanychZaszyfrowanych = new ObservableCollection<EncryptedInformation>();
         public ObservableCollection<EncryptedInformation> ListaDanychZaszyfrowanych { get { return listaDanychZaszyfrowanych; } set { listaDanychZaszyfrowanych = value; OnPropertyChanged("ListaDanychZaszyfrowanych"); } }
@@ -47,7 +49,8 @@ namespace WPF.ViewModel
         //Log_tb = String.Format("MIN:{0}, MAX:{1}\n {2}" , Lista.Min(), Lista.Max(), Log_tb);
 
         public string dbPath = Path.Combine(Directory.GetCurrentDirectory(), "database.db");
-        public MainViewModel() {
+        public MainViewModel()
+        {
             if (File.Exists(dbPath))
             {
                 ListaDanychZaszyfrowanych = LoadData();
@@ -101,18 +104,25 @@ namespace WPF.ViewModel
             {
                 ret = readerdb.GetString(0);
             }
-        connection.Close();
-        return ret;
+            connection.Close();
+            return ret;
         }
 
         public void SendQuerry(string querry)
         {
-            using var connection = new SqliteConnection($"Data Source={dbPath}");
-            connection.Open();
-            using var command = connection.CreateCommand();
-            command.CommandText = querry;
-            command.ExecuteNonQuery();
-            connection.Close();
+            try
+            {
+                using var connection = new SqliteConnection($"Data Source={dbPath}");
+                connection.Open();
+                using var command = connection.CreateCommand();
+                command.CommandText = querry;
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Błąd bazy danych, obiekt nie dodany. \n" + ex.Message);
+            }
         }
     }
 }

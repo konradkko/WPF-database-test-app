@@ -41,12 +41,15 @@
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                     <Label MaxWidth="200px" Content="{Binding SelectedNameLabel}"/>
                     <Label MaxWidth="200px" Content="{Binding SelectedDataLabel}"/>
-                    <Button Content="Usuń wpis" Width="150px" Click="Click_DeleteRecord" Height="25" Margin="10,10,10,0"/>
+                    <Label MaxWidth="200px" Content="{Binding SelectedKeyLabel}"/>
                     <Button Content="Odszyfruj" Width="150px" Click="Click_Decrypt" Height="25" Margin="10,10,10,10"/>
                     <TextBox Width="200px" Text="{Binding Result, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <Button Content="Usuń wpis" Width="150px" Click="Click_DeleteRecord" Height="25" Margin="10,10,10,0"/>
+                    <Button Content="Edytuj" Width="150px" Click="Click_UpdateRecord" Height="25" Margin="10,10,10,0"/>
+
                 </StackPanel>
             </StackPanel>
-            
+
         </StackPanel>
         <TextBox Background="LightGray" FontFamily="Consolas" VerticalScrollBarVisibility="Auto"
                  Text="{Binding Log_tb, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="0,292,0,0" Grid.RowSpan="2"/>

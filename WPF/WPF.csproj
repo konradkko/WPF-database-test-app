@@ -9,13 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="cryptDLL">
-      <HintPath>..\..\cryptDLL\cryptDLL\bin\Debug\net8.0\cryptDLL.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.10" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.10" />
+    <Reference Include="cryptDLL">
+      <HintPath>..\..\..\cryptDLL\cryptDLL\bin\Debug\net8.0\cryptDLL.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
