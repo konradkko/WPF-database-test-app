@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Reference Include="cryptDLL">
-      <HintPath>..\..\..\cryptDLL\cryptDLL\bin\Debug\net8.0\cryptDLL.dll</HintPath>
+      <HintPath>..\..\cryptDLL\cryptDLL\bin\Debug\net8.0\cryptDLL.dll</HintPath>
     </Reference>
   </ItemGroup>
 
